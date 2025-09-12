@@ -1,0 +1,1 @@
+notes and debugging data is in the other repo : k8s4

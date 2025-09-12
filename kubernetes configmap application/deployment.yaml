@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: configmap-nginx
+  template:
+    metadata:
+      labels:
+        app: configmap-nginx
+    spec:
+      volumes:
+       - name: config-volume
+         configMap:
+             name: my-configmap
+      containers:
+       - name: nginx-container
+         image: nginx:1.22.0
+         ports:
+            - containerPort: 80
+         volumeMounts:
+            - name: config-volume
+              mountPath: /usr/share/nginx/html
